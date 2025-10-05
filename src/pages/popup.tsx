@@ -8,10 +8,10 @@ type PopupProps = {
 
 const Popup: React.FC<PopupProps> = ({ onClose }) => {
   return (
-    <div className="popup-overlay" onClick={onClose}>
-      <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+    <div className="popups-overlay" onClick={onClose}>
+      <div className="popups-content" onClick={(e) => e.stopPropagation()}>
         <p>explaination about the app</p>
-        <button className="popup-close" onClick={onClose}>
+        <button className="popups-close" onClick={onClose}>
           close
         </button>
       </div>
