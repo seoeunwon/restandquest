@@ -96,15 +96,18 @@ function App() {
           <div className="time-bar-game">
             <div
               style={{
-                width: `${((hpTime - actualTime + restTime) / hpTime) * 100}%`,
+                width: `${
+                  ((hpTime - actualTime + restTime - 1) / hpTime) * 100
+                }%`,
                 height: "100%",
                 backgroundColor: "green",
               }}
             />
           </div>
           <span className="time-text-side">
-            time left: {Math.max(0, Math.round(hpTime - actualTime + restTime))}{" "}
-            hours
+            {hpTime - actualTime + restTime - 1 > 0
+              ? Math.round(hpTime - actualTime + restTime - 1) + " hours left"
+              : "NO TIME LEFT, YOU NEED TO REST!"}
           </span>
         </div>
       </header>
