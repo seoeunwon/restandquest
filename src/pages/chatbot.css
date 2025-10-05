@@ -1,7 +1,7 @@
+/* === Overlay & container === */
 .popup-overlay {
-  position: absolute;
-  width: 390px;
-  height: 844px;
+  position: fixed;              /* was absolute */
+  inset: 0;                     /* top:0; right:0; bottom:0; left:0 */
   background: rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
@@ -19,8 +19,10 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;           /* for the close button */
 }
 
+/* === Messages === */
 .chat-messages {
   flex: 1;
   padding: 16px;
@@ -28,6 +30,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  scrollbar-width: thin;
 }
 
 .user-msg {
@@ -37,6 +40,7 @@
   padding: 10px 14px;
   border-radius: 16px 16px 0 16px;
   max-width: 70%;
+  line-height: 1.35;
 }
 
 .bot-msg {
@@ -46,6 +50,23 @@
   padding: 10px 14px;
   border-radius: 16px 16px 16px 0;
   max-width: 70%;
+  line-height: 1.35;
+}
+
+/* live interim speech bubble */
+.user-msg--interim {
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* === Input row === */
+.popup-content > div:last-of-type {
+  display: flex;
+  padding: 10px;
+  gap: 8px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  align-items: center;
 }
 
 .popup-content input {
@@ -59,32 +80,56 @@
   font-size: 14px;
 }
 
-.popup-content > div:last-of-type {
-  display: flex;
-  padding: 10px;
-  gap: 8px;
-  background: #fff;
-  border-top: 1px solid #ddd;
-}
-
+/* === Buttons === */
 .popup-content button {
   border: none;
   cursor: pointer;
   transition: 0.2s ease;
 }
 
-.popup-content button:not(.popup-close) {
-  background: #black;
+.popup-content button:not(.popup-close):not(.mic-btn) {
+  background: black;            /* fixed from '#black' */
   color: white;
   padding: 8px 16px;
   border-radius: 20px;
   font-weight: 500;
 }
 
+/* close button in the corner */
 .popup-close {
-  width: 15%;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
   background: white;
   color: black;
-  font-size: 20px;
+  font-size: 18px;
   border-radius: 50%;
+  border: 1px solid #eee;
+}
+
+/* mic button */
+.mic-btn {
+  padding: 0 10px;
+  height: 36px;
+  border-radius: 18px;
+  border: 1px solid #ddd;
+  background: #fff;
+  min-width: 44px;              /* touch target */
+}
+
+.mic-btn--on {
+  outline: 2px solid #ff7a59;   /* recording state */
+  outline-offset: 2px;
+  background: #fff5f1;
+}
+
+/* optional hint under input row */
+.last-hours-hint {
+  padding: 0 12px 10px;
+  font-size: 12px;
+  color: #666;
 }
