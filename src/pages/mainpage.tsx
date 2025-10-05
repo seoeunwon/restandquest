@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { Play, Info, MessageSquare } from "lucide-react";
 import "./mainpage.css";
-import { locations } from "../jsonfile/locations";
 import Popup from "./popup";
 import ChatPopup from "./chatbot";
+import { locations } from "../jsonfile/data";
+import expectedEarnings from "../assets/expected_earnings_per_driver.json";
 
 function App() {
   const [selectedCity, setSelectedCity] = useState("City 1");
-  const [sliderValue, setSliderValue] = useState(0.0);
+  const [time, setTime] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
   const [showChatbot, setShowChatbot] = useState(false);
-  const [time, setTime] = useState(6);
-  const maxTime = 8;
 
+  const maxTime = 8;
+  const dotSize = 20;
   const mapWidth = 350;
   const mapHeight = 300;
   const selectedCityNumber = parseInt(selectedCity.split(" ")[1]);
@@ -28,16 +29,34 @@ function App() {
     return { x, y };
   };
 
-  const handleInfoClick = () => {
-    setShowPopup(true);
-  };
-  const handleChatbotClick = () => {
-    setShowChatbot(true);
-  };
+  const handleInfoClick = () => setShowPopup(true);
+  const handleChatbotClick = () => setShowChatbot(true);
+
+  // 현재 시간, 도시, 날씨에 맞는 데이터 가져오기
+  const currentData = expectedEarnings.data.find(
+    (row: any) =>
+      row[0] === "clear" && row[1] === selectedCityNumber && row[2] === time
+  );
+
+  const passengerCircles = locations
+    .filter((loc) => loc.city === selectedCityNumber)
+    .map((loc) => {
+      const pos = getPosition(loc.latitude, loc.longitude);
+      const value =
+        currentData && loc.number >= 0 && loc.number <= 5
+          ? Number(currentData[3 + loc.number])
+          : 0;
+
+      return {
+        x: pos.x,
+        y: pos.y,
+        value,
+        clusterNumber: loc.number,
+      };
+    });
 
   return (
     <div className="app-container">
-      {/* Header */}
       <header className="header">
         <div className="top-bar">
           <select
@@ -51,6 +70,9 @@ function App() {
             <option>City 4</option>
             <option>City 5</option>
           </select>
+          <div>
+            <span className="day-indicator">2025.10.05(SUN)</span>
+          </div>
           <div className="weather-info">
             <span className="temp">🌡 12°</span>
             <span className="weather">clear</span>
@@ -61,43 +83,63 @@ function App() {
           <div className="time-bar-game">
             <div
               className="time-fill"
-              style={{ width: `${(time / maxTime) * 100}%` }}
+              style={{ width: `${((maxTime - time) / maxTime) * 100}%` }}
             />
           </div>
-          <span className="time-text-side">time left: {time} hours</span>
+          <span className="time-text-side">
+            time left: {Math.max(0, Math.round(maxTime - time))} hours
+          </span>
         </div>
       </header>
 
-      {/* Main Map */}
       <main className="main">
         <div
           className="map-placeholder"
           style={{ position: "relative", width: mapWidth, height: mapHeight }}
         >
-          {locations
-            .filter((loc) => loc.city === selectedCityNumber)
-            .map((loc) => {
-              const pos = getPosition(loc.latitude, loc.longitude);
-              return (
+          {passengerCircles.map((c, i) => {
+            const v = c.value;
+
+            // 색상 매핑
+            let color = "white";
+            if (v > 0 && v <= 4) color = "yellow";
+            else if (v > 4 && v <= 8) color = "orange";
+            else if (v > 8) color = "red";
+
+            return (
+              <div key={i}>
+                {/* 원 */}
                 <div
-                  key={loc.number}
                   style={{
                     position: "absolute",
-                    width: 12,
-                    height: 12,
+                    width: dotSize,
+                    height: dotSize,
                     borderRadius: "50%",
-                    backgroundColor: "red",
-                    left: pos.x - 6,
-                    top: pos.y - 6,
+                    backgroundColor: color,
+                    left: c.x - dotSize / 2,
+                    top: c.y - dotSize / 2,
+                    border: "1px solid black",
                   }}
-                  title={`number: ${loc.number}`}
                 />
-              );
-            })}
+                {/* 숫자 표시 */}
+                <div
+                  style={{
+                    position: "absolute",
+                    left: c.x - 5,
+                    top: c.y - 10,
+                    fontSize: "12px",
+                    fontWeight: "bold",
+                    color: "black",
+                  }}
+                >
+                  {v.toFixed(1)}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </main>
 
-      {/* Footer */}
       <footer className="footer">
         <div className="slider-section">
           <label htmlFor="slider" className="slider-label">
@@ -106,14 +148,14 @@ function App() {
           <input
             id="slider"
             type="range"
-            min={0.5}
-            max={12.5}
+            min={0}
+            max={maxTime - 1}
             step={0.5}
-            value={sliderValue}
-            onChange={(e) => setSliderValue(parseFloat(e.target.value))}
+            value={time}
+            onChange={(e) => setTime(parseFloat(e.target.value))}
             className="slider"
           />
-          <p>🚙 {sliderValue} hours later</p>
+          <p>🚙 {time} hours later</p>
         </div>
 
         <div className="action-buttons">
@@ -129,7 +171,6 @@ function App() {
         </div>
       </footer>
 
-      {/* Popup */}
       {showChatbot && <ChatPopup onClose={() => setShowChatbot(false)} />}
       {showPopup && <Popup onClose={() => setShowPopup(false)} />}
     </div>
