@@ -1,0 +1,85 @@
+.popup-content {
+  background: #ffffff;
+  width: 50%;
+  height: 50%;
+  max-width: 350px;
+  max-height: 500px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user-msg {
+  align-self: flex-end;
+  background: #0078ff;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 16px 16px 0 16px;
+  max-width: 70%;
+}
+
+.bot-msg {
+  align-self: flex-start;
+  background: #f1f1f1;
+  color: #333;
+  padding: 10px 14px;
+  border-radius: 16px 16px 16px 0;
+  max-width: 70%;
+}
+
+.popup-content input {
+  flex: 1;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 20px;
+  background: #f3f3f3;
+  outline: none;
+  font-size: 14px;
+}
+
+.popup-content > div:last-of-type {
+  display: flex;
+  padding: 10px;
+  gap: 8px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+}
+
+.popup-content button {
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+/* Send 버튼 */
+.popup-content button:not(.popup-close) {
+  background: #0078ff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+.popup-content button:not(.popup-close):hover {
+  background: #0060cc;
+}
+
+/* Close 버튼 */
+.popup-close {
+  width: 15%;
+  background: #ff3b30;
+  color: white;
+  border-radius: 50%;
+}
+.popup-close:hover {
+  background: #d9342b;
+}

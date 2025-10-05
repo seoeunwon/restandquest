@@ -2,18 +2,21 @@ import React, { useState } from "react";
 import { Play, Info, MessageSquare } from "lucide-react";
 import "./mainpage.css";
 import { locations } from "../jsonfile/locations";
+import Popup from "./popup";
+import ChatPopup from "./chatbot";
 
 function App() {
   const [selectedCity, setSelectedCity] = useState("City 1");
   const [sliderValue, setSliderValue] = useState(0.0);
-  const [hp, setHp] = useState(80);
-  const maxHp = 100;
+  const [showPopup, setShowPopup] = useState(false);
+  const [showChatbot, setShowChatbot] = useState(false);
+  const [time, setTime] = useState(6);
+  const maxTime = 8;
 
   const mapWidth = 350;
   const mapHeight = 300;
   const selectedCityNumber = parseInt(selectedCity.split(" ")[1]);
 
-  // 지도 좌표 변환
   const minLat = Math.min(...locations.map((l) => l.latitude));
   const maxLat = Math.max(...locations.map((l) => l.latitude));
   const minLng = Math.min(...locations.map((l) => l.longitude));
@@ -25,10 +28,16 @@ function App() {
     return { x, y };
   };
 
-  const handleInfoClick = () => {};
+  const handleInfoClick = () => {
+    setShowPopup(true);
+  };
+  const handleChatbotClick = () => {
+    setShowChatbot(true);
+  };
 
   return (
     <div className="app-container">
+      {/* Header */}
       <header className="header">
         <div className="top-bar">
           <select
@@ -47,14 +56,15 @@ function App() {
             <span className="weather">clear</span>
           </div>
         </div>
-        <div className="hp-bar-wrapper">
-          <div className="hp-bar-game">
+
+        <div className="time-bar-wrapper">
+          <div className="time-bar-game">
             <div
-              className="hp-fill"
-              style={{ width: `${(hp / maxHp) * 100}%` }}
+              className="time-fill"
+              style={{ width: `${(time / maxTime) * 100}%` }}
             />
           </div>
-          <span className="hp-text-side">HP: {hp}</span>
+          <span className="time-text-side">time left: {time} hours</span>
         </div>
       </header>
 
@@ -87,7 +97,7 @@ function App() {
         </div>
       </main>
 
-      {/* Footer: slider + HP bar + action buttons */}
+      {/* Footer */}
       <footer className="footer">
         <div className="slider-section">
           <label htmlFor="slider" className="slider-label">
@@ -96,8 +106,8 @@ function App() {
           <input
             id="slider"
             type="range"
-            min={0}
-            max={12}
+            min={0.5}
+            max={12.5}
             step={0.5}
             value={sliderValue}
             onChange={(e) => setSliderValue(parseFloat(e.target.value))}
@@ -110,7 +120,7 @@ function App() {
           <button className="action-button">
             <Play className="action-icon" />
           </button>
-          <button className="action-button">
+          <button className="action-button" onClick={handleChatbotClick}>
             <MessageSquare className="action-icon" />
           </button>
           <button className="action-button" onClick={handleInfoClick}>
@@ -118,6 +128,10 @@ function App() {
           </button>
         </div>
       </footer>
+
+      {/* Popup */}
+      {showChatbot && <ChatPopup onClose={() => setShowChatbot(false)} />}
+      {showPopup && <Popup onClose={() => setShowPopup(false)} />}
     </div>
   );
 }

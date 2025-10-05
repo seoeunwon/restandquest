@@ -65,7 +65,7 @@
   font-family: "Uber Move", sans-serif;
   font-weight: bold;
 }
-.hp-bar-game {
+.time-bar-game {
   position: relative;
   width: 45%;
   height: 12px;
@@ -76,12 +76,12 @@
   overflow: hidden;
 }
 
-.hp-fill {
+.time-fill {
   height: 100%;
   background-color: #f00;
 }
 
-.hp-text {
+.time-text {
   font-family: "Uber Move", sans-serif;
 }
 
