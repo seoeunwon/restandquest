@@ -10,6 +10,4 @@ By checking working time and providing warnings when users work too much, it hel
 
 ### 2. Recommend Next Move
 One of the hardest tasks for Uber drivers is finding the **optimal waiting time**.  
-If a driver moves to pick up a call and a passenger arrives at their original location, it represents a **significant loss**.  
-
-To prevent this, the app aims to **reduce waiting time** by developing a **predictive model using mathematical methods**.
+If a driver moves to pick up a call and a passenger arrives at their original location, it represents a **significant loss**.To prevent this, the app aims to **reduce waiting time** by developing a **predictive model using mathematical methods**.
