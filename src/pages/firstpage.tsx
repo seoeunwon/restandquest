@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import "./firstpage.css";
-import logo from "./assets/logo_1.png";
+import logo from "../assets/logo_1.png";
 import { useNavigate } from "react-router-dom";
 
 const FirstPage: React.FC = () => {
