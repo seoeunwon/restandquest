@@ -4,12 +4,12 @@ const locations = [
   { city: 1, number: 2, latitude: 52.3416836842, longitude: 4.8462692105 },
   { city: 1, number: 3, latitude: 52.4031034091, longitude: 4.9464064773 },
   { city: 1, number: 4, latitude: 52.3646281553, longitude: 4.9309624272 },
-  { city: 1, number: 5, latitude: 52.3610820455, longitude: 4.9021178409 },
-  { city: 2, number: 0, latitude: 52.3285686207, longitude: 4.9029149425 },
-  { city: 2, number: 1, latitude: 52.3857604762, longitude: 4.857184381 },
-  { city: 2, number: 2, latitude: 52.3416836842, longitude: 4.8462692105 },
-  { city: 2, number: 3, latitude: 52.4031034091, longitude: 4.9464064773 },
-  { city: 2, number: 4, latitude: 52.3646281553, longitude: 4.9309624272 },
+  { city: 1, number: 5, latitude: 52.36455, longitude: 4.98403339 },
+  { city: 2, number: 0, latitude: 52.3285686207, longitude: 4.9339149425 },
+  { city: 2, number: 1, latitude: 52.38574762, longitude: 4.8335718431 },
+  { city: 2, number: 2, latitude: 52.341683, longitude: 4.89333105 },
+  { city: 2, number: 3, latitude: 52.4031034091, longitude: 4.9464064333773 },
+  { city: 2, number: 4, latitude: 52.3646281553, longitude: 4.930933624272 },
 ];
 export type PassengerData = [
   string,
