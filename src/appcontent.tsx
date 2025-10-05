@@ -1,3 +1,4 @@
+// App.tsx
 import React, { useState } from "react";
 import { Play, Info, MessageSquare } from "lucide-react";
 import "./Appcontent.css";
@@ -63,7 +64,7 @@ function App() {
                     width: 12,
                     height: 12,
                     borderRadius: "50%",
-                    backgroundColor: "red",
+                    backgroundColor: "red", // 필요 없으면 transparent로
                     left: pos.x - 6,
                     top: pos.y - 6,
                   }}
