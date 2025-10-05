@@ -1,0 +1,52 @@
+const locations = [
+  { city: 1, number: 0, latitude: 52.3285686207, longitude: 4.9029149425 },
+  { city: 1, number: 1, latitude: 52.3857604762, longitude: 4.857184381 },
+  { city: 1, number: 2, latitude: 52.3416836842, longitude: 4.8462692105 },
+  { city: 1, number: 3, latitude: 52.4031034091, longitude: 4.9464064773 },
+  { city: 1, number: 4, latitude: 52.3646281553, longitude: 4.9309624272 },
+  { city: 1, number: 5, latitude: 52.3610820455, longitude: 4.9021178409 },
+  { city: 2, number: 0, latitude: 52.3285686207, longitude: 4.9339149425 },
+  { city: 2, number: 1, latitude: 52.38574762, longitude: 4.8335718431 },
+  { city: 2, number: 2, latitude: 52.341683, longitude: 4.89333105 },
+  { city: 2, number: 4, latitude: 52.3646281553, longitude: 4.930933624272 },
+];
+export type PassengerData = [
+  string,
+  string,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number
+];
+
+export const passangerData: PassengerData[] = [
+  ["clear", "SUN", 0.5, 1, 2, 3, 4, 5, 6],
+  ["clear", "SUN", 1.0, 0, 2, 3, 0, 0, 1],
+  ["clear", "SUN", 1.5, 0, 1, 0, 0, 3, 0],
+  ["clear", "SUN", 2.0, 0, 0, 0, 0, 0, 0],
+  ["clear", "SUN", 2.5, 0, 0, 0, 1, 0, 0],
+  ["clear", "SUN", 3.0, 1, 0, 0, 0, 0, 0],
+  ["clear", "SUN", 3.5, 0, 0, 3, 0, 0, 0],
+  ["clear", "SUN", 4.0, 0, 0, 0, 0, 1, 0],
+  ["clear", "SUN", 4.5, 0, 0, 0, 0, 0, 0],
+  ["clear", "SUN", 5.0, 0, 1, 0, 0, 0, 3],
+  ["clear", "SUN", 5.5, 0, 0, 0, 0, 0, 0],
+  ["clear", "SUN", 6.0, 0, 0, 0, 0, 0, 1],
+  ["clear", "SUN", 6.5, 0, 0, 0, 0, 0, 0],
+  ["clear", "SUN", 7.0, 1, 0, 0, 0, 0, 0],
+  ["clear", "SUN", 7.5, 0, 0, 0, 0, 0, 0],
+  ["clear", "SUN", 8.0, 0, 0, 0, 0, 3, 0],
+  ["clear", "SUN", 8.5, 0, 0, 0, 0, 0, 0],
+  ["clear", "SUN", 9.0, 0, 0, 1, 0, 0, 0],
+  ["clear", "SUN", 9.5, 0, 0, 0, 0, 0, 0],
+  ["clear", "SUN", 10.0, 0, 0, 0, 0, 1, 0],
+  ["clear", "SUN", 10.5, 0, 0, 0, 0, 0, 0],
+  ["clear", "SUN", 11.0, 0, 0, 0, 3, 0, 0],
+  ["clear", "SUN", 11.5, 0, 0, 0, 0, 0, 0],
+  ["clear", "SUN", 12.0, 0, 0, 0, 0, 0, 0],
+  ["clear", "SUN", 12.5, 0, 0, 0, 0, 0, 1],
+];
+export { locations };
